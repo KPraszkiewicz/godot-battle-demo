@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://drjta4xldg0e0"]
+
+[ext_resource type="Script" path="res://scripts/action_panel.gd" id="1_7fe7u"]
+
+[node name="PanelContainer" type="Panel"]
+custom_minimum_size = Vector2(120, 120)
+offset_right = 120.0
+offset_bottom = 120.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_7fe7u")
+
+[node name="ActionPanel" type="Panel" parent="."]
+modulate = Color(0, 1, 1, 1)
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+offset_left = 25.0
+offset_top = 10.545
+offset_right = 95.0
+offset_bottom = 80.545
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ActionLabel" type="Label" parent="ActionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ruch"
+
+[node name="CellsContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 2.0
+offset_top = 100.0
+offset_right = 118.0
+offset_bottom = 120.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="b1" type="ColorRect" parent="CellsContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="b2" type="ColorRect" parent="CellsContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="b3" type="ColorRect" parent="CellsContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="b4" type="ColorRect" parent="CellsContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[connection signal="gui_input" from="ActionPanel" to="." method="_on_action_panel_gui_input"]
+[connection signal="mouse_exited" from="CellsContainer" to="." method="_on_cells_container_mouse_exited"]
+[connection signal="gui_input" from="CellsContainer/b1" to="." method="_on_b1_gui_input"]
+[connection signal="mouse_entered" from="CellsContainer/b1" to="." method="_on_b1_mouse_entered"]
+[connection signal="mouse_exited" from="CellsContainer/b1" to="." method="_on_cells_container_mouse_exited"]
+[connection signal="gui_input" from="CellsContainer/b2" to="." method="_on_b2_gui_input"]
+[connection signal="mouse_entered" from="CellsContainer/b2" to="." method="_on_b2_mouse_entered"]
+[connection signal="mouse_exited" from="CellsContainer/b2" to="." method="_on_cells_container_mouse_exited"]
+[connection signal="gui_input" from="CellsContainer/b3" to="." method="_on_b3_gui_input"]
+[connection signal="mouse_entered" from="CellsContainer/b3" to="." method="_on_b3_mouse_entered"]
+[connection signal="mouse_exited" from="CellsContainer/b3" to="." method="_on_cells_container_mouse_exited"]
+[connection signal="gui_input" from="CellsContainer/b4" to="." method="_on_b4_gui_input"]
+[connection signal="mouse_entered" from="CellsContainer/b4" to="." method="_on_b4_mouse_entered"]
+[connection signal="mouse_exited" from="CellsContainer/b4" to="." method="_on_cells_container_mouse_exited"]

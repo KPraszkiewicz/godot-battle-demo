@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8e62lk86hwop"]
+
+[ext_resource type="Script" path="res://scripts/projective.gd" id="1_803b4"]
+
+[node name="projectile" type="Sprite2D"]
+script = ExtResource("1_803b4")

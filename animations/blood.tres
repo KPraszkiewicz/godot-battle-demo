@@ -1,0 +1,107 @@
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://0v27kd3ggvu2"]
+
+[ext_resource type="Texture2D" uid="uid://3r7fbtm78nq5" path="res://gfx/roguelike-game-kit-pixel-art/1 Characters/Other/D_Blood.png" id="1_2lqqq"]
+[ext_resource type="Texture2D" uid="uid://oshvt36o72t0" path="res://gfx/roguelike-game-kit-pixel-art/1 Characters/Other/S_Blood.png" id="2_lbmpd"]
+[ext_resource type="Texture2D" uid="uid://ba5hdcwd1hdkn" path="res://gfx/roguelike-game-kit-pixel-art/1 Characters/Other/U_Blood.png" id="3_eoo2b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moib7"]
+atlas = ExtResource("1_2lqqq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u1lk"]
+atlas = ExtResource("1_2lqqq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6606"]
+atlas = ExtResource("1_2lqqq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hf74"]
+atlas = ExtResource("1_2lqqq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0k52"]
+atlas = ExtResource("2_lbmpd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckj7x"]
+atlas = ExtResource("2_lbmpd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c8ng"]
+atlas = ExtResource("2_lbmpd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvkqo"]
+atlas = ExtResource("2_lbmpd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mib1"]
+atlas = ExtResource("3_eoo2b")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8817"]
+atlas = ExtResource("3_eoo2b")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdgpp"]
+atlas = ExtResource("3_eoo2b")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwb3s"]
+atlas = ExtResource("3_eoo2b")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moib7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u1lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6606")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hf74")
+}],
+"loop": false,
+"name": &"D_BLOOD",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0k52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckj7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c8ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvkqo")
+}],
+"loop": false,
+"name": &"S_BLOOD",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mib1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8817")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdgpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwb3s")
+}],
+"loop": false,
+"name": &"U_BLOOD",
+"speed": 5.0
+}]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://5jpwle1d3w77"]
+
+[ext_resource type="Script" path="res://scripts/ui_bar_resize.gd" id="1_bisy7"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bisy7")
+back_color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[node name="resizable" type="ColorRect" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "HP"
