@@ -1,189 +1,18 @@
-[gd_scene load_steps=23 format=4 uid="uid://vs62iy3c0s6o"]
+[gd_scene load_steps=14 format=3 uid="uid://vs62iy3c0s6o"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_g4dbo"]
-[ext_resource type="Script" path="res://scripts/map.gd" id="1_ou183"]
 [ext_resource type="Script" path="res://scripts/turn_system.gd" id="2_n87ik"]
-[ext_resource type="Texture2D" uid="uid://deafjnj356tnr" path="res://gfx/cell32.png" id="2_s0wpu"]
-[ext_resource type="PackedScene" uid="uid://vpwuvvwfovrv" path="res://scenes/character.tscn" id="3_os2yo"]
-[ext_resource type="Texture2D" uid="uid://bsigibltwglqp" path="res://gfx/character.png" id="4_tj750"]
-[ext_resource type="Texture2D" uid="uid://dd4ima0h8hslx" path="res://gfx/roguelike-game-kit-pixel-art/2 Dungeon Tileset/1 Tiles/Tileset32.png" id="4_tltkl"]
+[ext_resource type="Script" path="res://scripts/map_handler.gd" id="3_1du6u"]
+[ext_resource type="Script" path="res://scripts/movement_system.gd" id="3_ajdv5"]
+[ext_resource type="Script" path="res://scripts/attack_system.gd" id="4_6eefx"]
+[ext_resource type="PackedScene" uid="uid://c378755baohsr" path="res://maps/map1.tscn" id="4_xhv5r"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="6_8hn7b"]
-[ext_resource type="Script" path="res://scripts/ui_turn_queue.gd" id="6_ciw6d"]
-[ext_resource type="Script" path="res://scripts/ai_module.gd" id="6_i1voq"]
 [ext_resource type="PackedScene" uid="uid://drjta4xldg0e0" path="res://scenes/action_panel.tscn" id="6_vdnp4"]
-[ext_resource type="Script" path="res://scenes/entities.gd" id="8_88v18"]
+[ext_resource type="Script" path="res://scripts/entities.gd" id="7_voork"]
 [ext_resource type="Script" path="res://scripts/battle_camera.gd" id="8_ha2av"]
 [ext_resource type="PackedScene" uid="uid://bh4qptjfbfwss" path="res://scenes/character_stats_panel.tscn" id="9_ebxu3"]
 [ext_resource type="Script" path="res://scripts/player_actions_panel.gd" id="10_g3o2k"]
-[ext_resource type="Theme" uid="uid://62hnbiqjv2a1" path="res://new_theme.tres" id="15_rr4vg"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4jskd"]
-texture = ExtResource("4_tltkl")
-texture_region_size = Vector2i(32, 32)
-1:1/0 = 0
-1:1/0/custom_data_0 = 1
-2:1/0 = 0
-2:1/0/custom_data_0 = 1
-3:1/0 = 0
-3:1/0/custom_data_0 = 1
-4:1/0 = 0
-4:1/0/custom_data_0 = 1
-5:1/0 = 0
-5:1/0/custom_data_0 = 1
-7:1/0 = 0
-7:1/0/custom_data_0 = 1
-9:1/0 = 0
-9:1/0/custom_data_0 = 1
-12:1/0 = 0
-12:1/0/custom_data_0 = 1
-15:1/0 = 0
-16:1/0 = 0
-17:1/0 = 0
-1:2/0 = 0
-1:2/0/custom_data_0 = 1
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-5:2/0/custom_data_0 = 1
-7:2/0 = 0
-7:2/0/custom_data_0 = 1
-11:2/0 = 0
-11:2/0/custom_data_0 = 1
-12:2/0 = 0
-12:2/0/custom_data_0 = 1
-13:2/0 = 0
-13:2/0/custom_data_0 = 1
-15:2/0 = 0
-16:2/0 = 0
-17:2/0 = 0
-1:3/0 = 0
-1:3/0/custom_data_0 = 1
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-5:3/0/custom_data_0 = 1
-9:3/0 = 0
-15:3/0 = 0
-16:3/0 = 0
-17:3/0 = 0
-1:4/0 = 0
-1:4/0/custom_data_0 = 1
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-5:4/0/custom_data_0 = 1
-7:4/0 = 0
-7:4/0/custom_data_0 = 1
-11:4/0 = 0
-11:4/0/custom_data_0 = 1
-12:4/0 = 0
-12:4/0/custom_data_0 = 1
-13:4/0 = 0
-13:4/0/custom_data_0 = 1
-15:4/0 = 0
-16:4/0 = 0
-17:4/0 = 0
-1:5/0 = 0
-1:5/0/custom_data_0 = 1
-2:5/0 = 0
-2:5/0/custom_data_0 = 1
-3:5/0 = 0
-3:5/0/custom_data_0 = 1
-4:5/0 = 0
-4:5/0/custom_data_0 = 1
-5:5/0 = 0
-5:5/0/custom_data_0 = 1
-7:5/0 = 0
-7:5/0/custom_data_0 = 1
-9:5/0 = 0
-9:5/0/custom_data_0 = 1
-12:5/0 = 0
-12:5/0/custom_data_0 = 1
-15:6/0 = 0
-16:6/0 = 0
-17:6/0 = 0
-1:7/0 = 0
-1:7/0/custom_data_0 = 1
-2:7/0 = 0
-3:7/0 = 0
-3:7/0/custom_data_0 = 1
-6:7/0 = 0
-6:7/0/custom_data_0 = 1
-8:7/0 = 0
-8:7/0/custom_data_0 = 1
-12:7/0 = 0
-12:7/0/custom_data_0 = 1
-15:7/0 = 0
-16:7/0 = 0
-17:7/0 = 0
-5:8/0 = 0
-5:8/0/custom_data_0 = 1
-6:8/0 = 0
-6:8/0/custom_data_0 = 1
-8:8/0 = 0
-8:8/0/custom_data_0 = 1
-9:8/0 = 0
-9:8/0/custom_data_0 = 1
-11:8/0 = 0
-11:8/0/custom_data_0 = 1
-12:8/0 = 0
-12:8/0/custom_data_0 = 1
-13:8/0 = 0
-13:8/0/custom_data_0 = 1
-15:8/0 = 0
-16:8/0 = 0
-17:8/0 = 0
-1:9/0 = 0
-1:9/0/custom_data_0 = 1
-2:9/0 = 0
-2:9/0/custom_data_0 = 1
-3:9/0 = 0
-3:9/0/custom_data_0 = 1
-6:9/0 = 0
-6:9/0/custom_data_0 = 1
-8:9/0 = 0
-8:9/0/custom_data_0 = 1
-12:9/0 = 0
-12:9/0/custom_data_0 = 1
-15:9/0 = 0
-16:9/0 = 0
-17:9/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_s3p01"]
-tile_size = Vector2i(32, 32)
-custom_data_layer_0/name = "height"
-custom_data_layer_0/type = 2
-sources/2 = SubResource("TileSetAtlasSource_4jskd")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hmo3o"]
-resource_name = "neutral_cell"
-texture = ExtResource("2_s0wpu")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6etrd"]
-resource_name = "bad_cell"
-texture = ExtResource("2_s0wpu")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/modulate = Color(1, 0, 0, 1)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sq0qj"]
-resource_name = "good_cell"
-texture = ExtResource("2_s0wpu")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/modulate = Color(0, 1, 0, 1)
-
-[sub_resource type="TileSet" id="TileSet_53ja8"]
-tile_size = Vector2i(32, 32)
-navigation_layer_0/layers = 1
-sources/1 = SubResource("TileSetAtlasSource_6etrd")
-sources/0 = SubResource("TileSetAtlasSource_hmo3o")
-sources/2 = SubResource("TileSetAtlasSource_sq0qj")
+[ext_resource type="Script" path="res://scripts/main_menu_container.gd" id="14_l4ddn"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_g4dbo")
@@ -192,57 +21,34 @@ script = ExtResource("1_g4dbo")
 unique_name_in_owner = true
 script = ExtResource("2_n87ik")
 
-[node name="Map" type="Node2D" parent="."]
+[node name="Movement_system" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_ou183")
+script = ExtResource("3_ajdv5")
 
-[node name="Ground" type="TileMapLayer" parent="Map"]
-tile_map_data = PackedByteArray("AAAAAAAAAgABAAEAAAABAAAAAgAEAAEAAAACAAAAAgACAAEAAAADAAAAAgADAAEAAAAEAAAAAgADAAEAAAAFAAAAAgADAAEAAAAGAAAAAgACAAEAAAAHAAAAAgACAAEAAAAIAAAAAgAEAAEAAAAKAAAAAgADAAEAAAALAAAAAgADAAEAAAANAAAAAgACAAEAAAAOAAAAAgACAAEAAAAPAAAAAgAFAAEAAAAMAAAAAgACAAEAAAAJAAAAAgADAAEAAAAPAAIAAgAFAAMAAAAPAAEAAgAFAAIAAAAPAAMAAgAFAAQAAAAPAAQAAgAFAAQAAAAPAAcAAgAFAAMAAAAPAAgAAgAFAAIAAAAPAAkAAgAFAAQAAAAPAAoAAgAFAAQAAAAPAAsAAgAFAAMAAAAPAAwAAgAFAAIAAAAPAAYAAgAFAAMAAAAPAAUAAgAFAAMAAAAPAA0AAgAFAAQAAAAPAA4AAgAFAAQAAAAPAA8AAgAFAAUAAAAOAA8AAgACAAUAAAANAA8AAgADAAUAAAAMAA8AAgACAAUAAAALAA8AAgACAAUAAAAKAA8AAgAEAAUAAAAJAA8AAgAEAAUAAAAIAA8AAgADAAUAAAAHAA8AAgAEAAUAAAAGAA8AAgAEAAUAAAAFAA8AAgADAAUAAAAEAA8AAgAEAAUAAAADAA8AAgADAAUAAAACAA8AAgADAAUAAAABAA8AAgACAAUAAAAAAA8AAgABAAUAAAAAAA4AAgABAAMAAAAAAA0AAgABAAMAAAAAAAwAAgABAAMAAAAAAAsAAgABAAQAAAAAAAUAAgABAAMAAAAAAAQAAgABAAMAAAAAAAMAAgABAAIAAAAAAAEAAgABAAMAAAAAAAIAAgABAAIAAAAAAAYAAgABAAMAAAAAAAcAAgABAAMAAAAAAAgAAgABAAQAAAAAAAkAAgABAAQAAAAAAAoAAgABAAIAAAABAAEAAgADAAMAAAABAAIAAgAEAAQAAAABAAMAAgAQAAcAAAABAAQAAgAPAAcAAAABAAUAAgARAAYAAAABAAYAAgARAAcAAAABAAcAAgAEAAQAAAABAAgAAgARAAYAAAABAAkAAgARAAgAAAABAAoAAgAPAAgAAAABAAsAAgADAAQAAAABAAwAAgAPAAcAAAABAA0AAgAEAAMAAAABAA4AAgAEAAMAAAACAAEAAgAPAAcAAAACAAIAAgADAAIAAAACAAMAAgAEAAMAAAACAAQAAgAPAAgAAAACAAUAAgAQAAgAAAACAAYAAgAPAAcAAAACAAcAAgAQAAcAAAACAAgAAgARAAYAAAACAAkAAgAEAAMAAAACAAoAAgAEAAIAAAACAAsAAgARAAgAAAACAAwAAgARAAkAAAACAA0AAgARAAgAAAACAA4AAgAEAAQAAAADAAEAAgAEAAMAAAADAAIAAgADAAQAAAADAAMAAgAEAAQAAAADAAQAAgACAAMAAAADAAUAAgADAAIAAAADAAYAAgAQAAkAAAADAAcAAgARAAkAAAADAAgAAgAQAAkAAAADAAkAAgAPAAcAAAADAAoAAgADAAIAAAADAAsAAgARAAgAAAADAAwAAgADAAQAAAADAA0AAgARAAcAAAADAA4AAgACAAQAAAAEAAEAAgACAAMAAAAEAAIAAgAEAAMAAAAEAAMAAgAPAAcAAAAEAAQAAgACAAQAAAAEAAUAAgACAAQAAAAEAAYAAgACAAMAAAAEAAcAAgAEAAMAAAAEAAgAAgADAAIAAAAEAAkAAgAQAAkAAAAEAAoAAgAPAAYAAAAEAAsAAgAPAAkAAAAEAAwAAgARAAkAAAAEAA0AAgAQAAgAAAAEAA4AAgADAAMAAAAFAAEAAgAPAAYAAAAFAAIAAgADAAIAAAAFAAMAAgADAAIAAAAFAAQAAgACAAQAAAAFAAUAAgAPAAkAAAAFAAYAAgAQAAcAAAAFAAcAAgADAAMAAAAFAAgAAgAPAAkAAAAFAAkAAgADAAQAAAAFAAoAAgAQAAgAAAAFAAsAAgARAAcAAAAFAAwAAgAPAAcAAAAFAA0AAgARAAgAAAAFAA4AAgADAAMAAAAGAAEAAgADAAQAAAAGAAIAAgACAAQAAAAGAAMAAgAEAAMAAAAGAAQAAgACAAMAAAAGAAUAAgAPAAcAAAAGAAYAAgADAAIAAAAGAAcAAgALAAgAAAAGAAgAAgACAAMAAAAGAAkAAgARAAYAAAAGAAoAAgADAAMAAAAGAAsAAgACAAQAAAAGAAwAAgAEAAIAAAAGAA0AAgARAAkAAAAGAA4AAgAEAAQAAAAHAAEAAgAPAAYAAAAHAAIAAgAEAAQAAAAHAAMAAgARAAgAAAAHAAQAAgACAAIAAAAHAAUAAgADAAMAAAAHAAYAAgAMAAcAAAAHAAcAAgAMAAgAAAAHAAgAAgAMAAkAAAAHAAkAAgADAAIAAAAHAAoAAgADAAMAAAAHAAsAAgARAAcAAAAHAAwAAgADAAMAAAAHAA0AAgAPAAkAAAAHAA4AAgAEAAQAAAAIAAEAAgAEAAMAAAAIAAIAAgAQAAYAAAAIAAMAAgACAAIAAAAIAAQAAgACAAMAAAAIAAUAAgAPAAcAAAAIAAYAAgARAAYAAAAIAAcAAgANAAgAAAAIAAgAAgAEAAIAAAAIAAkAAgADAAQAAAAIAAoAAgAPAAkAAAAIAAsAAgARAAYAAAAIAAwAAgAPAAcAAAAIAA0AAgARAAcAAAAIAA4AAgAQAAkAAAAJAAEAAgAPAAkAAAAJAAIAAgARAAkAAAAJAAMAAgAQAAYAAAAJAAQAAgADAAIAAAAJAAUAAgADAAIAAAAJAAYAAgAPAAgAAAAJAAcAAgAEAAMAAAAJAAgAAgAQAAgAAAAJAAkAAgAQAAcAAAAJAAoAAgAQAAkAAAAJAAsAAgARAAcAAAAJAAwAAgAEAAIAAAAJAA0AAgAQAAkAAAAJAA4AAgARAAkAAAAKAAEAAgADAAMAAAAKAAIAAgAPAAgAAAAKAAMAAgAQAAcAAAAKAAQAAgARAAcAAAAKAAUAAgAEAAIAAAAKAAYAAgAPAAgAAAAKAAcAAgAPAAkAAAAKAAgAAgAEAAIAAAAKAAkAAgAQAAYAAAAKAAoAAgARAAcAAAAKAAsAAgAEAAQAAAAKAAwAAgARAAcAAAAKAA0AAgACAAQAAAAKAA4AAgAPAAYAAAALAAEAAgADAAQAAAALAAIAAgADAAIAAAALAAMAAgAQAAcAAAALAAQAAgAPAAcAAAALAAUAAgAPAAkAAAALAAYAAgAQAAYAAAALAAcAAgAPAAkAAAALAAgAAgAPAAYAAAALAAkAAgADAAMAAAALAAoAAgAPAAcAAAALAAsAAgACAAIAAAALAAwAAgARAAkAAAALAA0AAgAEAAIAAAALAA4AAgAEAAIAAAAMAAEAAgAPAAcAAAAMAAIAAgADAAIAAAAMAAMAAgARAAgAAAAMAAQAAgAEAAMAAAAMAAUAAgACAAIAAAAMAAYAAgAPAAcAAAAMAAcAAgAQAAcAAAAMAAgAAgAEAAMAAAAMAAkAAgAQAAYAAAAMAAoAAgARAAcAAAAMAAsAAgADAAMAAAAMAAwAAgARAAgAAAAMAA0AAgAQAAcAAAAMAA4AAgARAAcAAAANAAEAAgADAAMAAAANAAIAAgAQAAYAAAANAAMAAgARAAYAAAANAAQAAgARAAgAAAANAAUAAgARAAYAAAANAAYAAgARAAgAAAANAAcAAgAPAAcAAAANAAgAAgAPAAcAAAANAAkAAgAPAAkAAAANAAoAAgARAAcAAAANAAsAAgARAAYAAAANAAwAAgADAAIAAAANAA0AAgAPAAYAAAANAA4AAgADAAQAAAAOAAEAAgARAAYAAAAOAAIAAgADAAMAAAAOAAMAAgAQAAgAAAAOAAQAAgARAAcAAAAOAAUAAgAPAAcAAAAOAAYAAgAPAAcAAAAOAAcAAgAPAAcAAAAOAAgAAgAPAAcAAAAOAAkAAgADAAIAAAAOAAoAAgAQAAYAAAAOAAsAAgAQAAYAAAAOAAwAAgAPAAgAAAAOAA0AAgAQAAgAAAAOAA4AAgAPAAkAAAA=")
-tile_set = SubResource("TileSet_s3p01")
+[node name="Attack_system" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_6eefx")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Map"]
-modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 1
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAACAAEAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAABAAcAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAADAAgAAAAAAAAAAAADAAcAAAAAAAAAAAABAAYAAAAAAAAAAAACAAgAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAkAAAAAAAAAAAAEAAgAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAsAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAIAAgAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAANAAkAAAAAAAAAAAANAAUAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAEAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAAHAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAGAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAEAAoAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAwAAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAFAAwAAAAAAAAAAAAGAAwAAAAAAAAAAAAHAAwAAAAAAAAAAAAIAAsAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAALAAwAAAAAAAAAAAAKAAwAAAAAAAAAAAAJAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAGAA0AAAAAAAAAAAAHAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAALAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAADAA0AAAAAAAAAAAADAAwAAAAAAAAAAAACAAwAAAAAAAAAAAACAAsAAAAAAAAAAAACAAoAAAAAAAAAAAABAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAABAA4AAAAAAAAAAAABAA0AAAAAAAAAAAABAAwAAAAAAAAAAAABAAsAAAAAAAAAAAACAA0AAAAAAAAAAAACAA4AAAAAAAAAAAADAA4AAAAAAAAAAAAEAA8AAAAAAAAAAAADAA8AAAAAAAAAAAACAA8AAAAAAAAAAAABAA8AAAAAAAAAAAAAAA8AAAAAAAAAAAAEAA4AAAAAAAAAAAAFAA4AAAAAAAAAAAAGAA4AAAAAAAAAAAAHAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAIAA8AAAAAAAAAAAAHAA8AAAAAAAAAAAAGAA8AAAAAAAAAAAAFAA8AAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA4AAAAAAAAAAAALAA4AAAAAAAAAAAAMAA4AAAAAAAAAAAANAA4AAAAAAAAAAAAOAA4AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAOAA8AAAAAAAAAAAANAA8AAAAAAAAAAAAMAA8AAAAAAAAAAAALAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAAJAA4AAAAAAAAAAAANAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAAPAA0AAAAAAAAAAAAPAAwAAAAAAAAAAAAOAAwAAAAAAAAAAAAOAAsAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAANAAsAAAAAAAAAAAAMAAsAAAAAAAAAAAAMAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAwAAAAAAAAAAAANAAoAAAAAAAAAAAANAAwAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_53ja8")
-collision_enabled = false
+[node name="MapHandler" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_1du6u")
 
-[node name="characters" type="Node2D" parent="Map"]
+[node name="Map" parent="MapHandler" instance=ExtResource("4_xhv5r")]
 unique_name_in_owner = true
 
-[node name="Character" parent="Map/characters" instance=ExtResource("3_os2yo")]
-position = Vector2(176, 177)
-char_name = "Gracz"
-fraction = "green"
-max_hp = 10000000
+[node name="Visualizations" type="Node2D" parent="."]
 
-[node name="Character2" parent="Map/characters" instance=ExtResource("3_os2yo")]
-position = Vector2(371, 176)
-char_name = "Bot1"
-fraction = "red"
-ai_control = true
-ai_module_script = ExtResource("6_i1voq")
-
-[node name="Character3" parent="Map/characters" instance=ExtResource("3_os2yo")]
-position = Vector2(339, 210)
-char_name = "Bot2"
-fraction = "red"
-ai_control = true
-ai_module_script = ExtResource("6_i1voq")
-
-[node name="PathLine" type="Line2D" parent="Map"]
-width = 2.0
-metadata/_edit_lock_ = true
-
-[node name="entities" type="Node2D" parent="Map"]
-script = ExtResource("8_88v18")
+[node name="Entities" type="Node2D" parent="."]
+script = ExtResource("7_voork")
 
 [node name="Cameras" type="Node2D" parent="."]
 
 [node name="BattleCamera" type="Camera2D" parent="Cameras"]
 unique_name_in_owner = true
 position = Vector2(251, 282)
-limit_left = -410
+offset = Vector2(0, 51.21)
+zoom = Vector2(0.875, 0.875)
+limit_left = -610
 limit_top = -135
 limit_right = 945
 limit_bottom = 675
@@ -251,40 +57,6 @@ script = ExtResource("8_ha2av")
 
 [node name="Gui" type="CanvasLayer" parent="."]
 script = ExtResource("6_8hn7b")
-
-[node name="PanelContainer" type="PanelContainer" parent="Gui"]
-custom_minimum_size = Vector2(0, 30)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -49.0
-offset_right = 49.0
-offset_bottom = 30.0
-grow_horizontal = 2
-
-[node name="UiTurnQueue" type="HBoxContainer" parent="Gui/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-script = ExtResource("6_ciw6d")
-
-[node name="TextureRect2" type="TextureRect" parent="Gui/PanelContainer/UiTurnQueue"]
-layout_mode = 2
-texture = ExtResource("4_tj750")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="TextureRect3" type="TextureRect" parent="Gui/PanelContainer/UiTurnQueue"]
-layout_mode = 2
-texture = ExtResource("4_tj750")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="TextureRect" type="TextureRect" parent="Gui/PanelContainer/UiTurnQueue"]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-texture = ExtResource("4_tj750")
-expand_mode = 2
-stretch_mode = 4
 
 [node name="bFinish" type="Button" parent="Gui"]
 anchors_preset = 7
@@ -299,6 +71,7 @@ offset_bottom = -124.83
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+mouse_default_cursor_shape = 2
 text = "Zatwierdź"
 
 [node name="PanelContainer2" type="PanelContainer" parent="Gui"]
@@ -314,19 +87,17 @@ grow_vertical = 0
 layout_mode = 2
 alignment = 1
 
-[node name="AllyStatsPanel" parent="Gui/PanelContainer2/HBoxContainer" node_paths=PackedStringArray("character_bind") instance=ExtResource("9_ebxu3")]
+[node name="AllyStatsPanel" parent="Gui/PanelContainer2/HBoxContainer" instance=ExtResource("9_ebxu3")]
 unique_name_in_owner = true
 layout_mode = 2
-character_bind = NodePath("../../../../Map/characters/Character")
 show_pa = true
 
-[node name="PlayerActionsPanel" type="PanelContainer" parent="Gui/PanelContainer2/HBoxContainer" node_paths=PackedStringArray("character_bind")]
+[node name="PlayerActionsPanel" type="PanelContainer" parent="Gui/PanelContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.3
 script = ExtResource("10_g3o2k")
-character_bind = NodePath("../../../../Map/characters/Character")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel"]
 layout_mode = 2
@@ -347,10 +118,9 @@ layout_mode = 2
 [node name="Action5" parent="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer" instance=ExtResource("6_vdnp4")]
 layout_mode = 2
 
-[node name="EnemyStatsPanel" parent="Gui/PanelContainer2/HBoxContainer" node_paths=PackedStringArray("character_bind") instance=ExtResource("9_ebxu3")]
+[node name="EnemyStatsPanel" parent="Gui/PanelContainer2/HBoxContainer" instance=ExtResource("9_ebxu3")]
 unique_name_in_owner = true
 layout_mode = 2
-character_bind = NodePath("../../../../Map/characters/Character2")
 
 [node name="teActions" type="TextEdit" parent="Gui"]
 unique_name_in_owner = true
@@ -368,45 +138,109 @@ virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 scroll_fit_content_height = true
 
-[node name="MidMenu" type="PanelContainer" parent="Gui"]
+[node name="MainMenuContainer" type="TabContainer" parent="Gui"]
 unique_name_in_owner = true
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -147.0
-offset_top = -89.0
-offset_right = 148.0
-offset_bottom = 89.0
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("15_rr4vg")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+current_tab = 0
+tabs_visible = false
+tab_focus_mode = 0
+script = ExtResource("14_l4ddn")
 
-[node name="MarginContainer" type="MarginContainer" parent="Gui/MidMenu"]
+[node name="MainMenu" type="CenterContainer" parent="Gui/MainMenuContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Gui/MainMenuContainer/MainMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MainMenuContainer/MainMenu/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Gui/MainMenuContainer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "WDTGW"
+horizontal_alignment = 1
+
+[node name="bToSelectLevel" type="Button" parent="Gui/MainMenuContainer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Wybierz poziom"
+
+[node name="bQuit" type="Button" parent="Gui/MainMenuContainer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Wyjdź"
+
+[node name="SelectMapMenu" type="CenterContainer" parent="Gui/MainMenuContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Gui/MainMenuContainer/SelectMapMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MainMenuContainer/SelectMapMenu/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Gui/MainMenuContainer/SelectMapMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Wybierz poziom"
+horizontal_alignment = 1
+
+[node name="bBack" type="Button" parent="Gui/MainMenuContainer/SelectMapMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Powrót"
+
+[node name="EndMenu" type="CenterContainer" parent="Gui/MainMenuContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Gui/MainMenuContainer/EndMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MidMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MainMenuContainer/EndMenu/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Gui/MidMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Gui/MainMenuContainer/EndMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Koniec Gry"
 
-[node name="Button" type="Button" parent="Gui/MidMenu/MarginContainer/VBoxContainer"]
+[node name="bBack" type="Button" parent="Gui/MainMenuContainer/EndMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Nowa Gra"
+size_flags_vertical = 4
+text = "Powrót"
 
 [connection signal="player_actions_confirm" from="Gui" to="." method="_on_gui_player_actions_confirm"]
 [connection signal="pressed" from="Gui/bFinish" to="Gui" method="_on_b_finish_pressed"]
 [connection signal="pa_changed" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" to="Gui" method="_on_player_actions_panel_pa_changed"]
+[connection signal="changed_type" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action1" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_1_changed_type"]
 [connection signal="clicked_cell" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action1" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_1_clicked_cell"]
+[connection signal="changed_type" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action2" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_2_changed_type"]
 [connection signal="clicked_cell" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action2" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_2_clicked_cell"]
+[connection signal="changed_type" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action3" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_3_changed_type"]
 [connection signal="clicked_cell" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action3" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_3_clicked_cell"]
+[connection signal="changed_type" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action4" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_4_changed_type"]
 [connection signal="clicked_cell" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action4" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_4_clicked_cell"]
+[connection signal="changed_type" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action5" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_5_changed_type"]
 [connection signal="clicked_cell" from="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel/HBoxContainer/Action5" to="Gui/PanelContainer2/HBoxContainer/PlayerActionsPanel" method="_on_action_5_clicked_cell"]
+[connection signal="pressed" from="Gui/MainMenuContainer/MainMenu/MarginContainer/VBoxContainer/bToSelectLevel" to="Gui/MainMenuContainer" method="_on_b_to_select_level_pressed"]
+[connection signal="pressed" from="Gui/MainMenuContainer/MainMenu/MarginContainer/VBoxContainer/bQuit" to="Gui/MainMenuContainer" method="_on_b_quit_pressed"]
+[connection signal="pressed" from="Gui/MainMenuContainer/SelectMapMenu/MarginContainer/VBoxContainer/bBack" to="Gui/MainMenuContainer" method="_on_b_back_pressed"]
+[connection signal="pressed" from="Gui/MainMenuContainer/EndMenu/MarginContainer/VBoxContainer/bBack" to="Gui/MainMenuContainer" method="_on_b_back_pressed"]

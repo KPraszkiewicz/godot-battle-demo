@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://scripts/character_stats_panel.gd" id="1_o338i"]
 [ext_resource type="PackedScene" uid="uid://5jpwle1d3w77" path="res://scenes/fill_bar.tscn" id="2_l3qe0"]
 
-[node name="CharacterStatsPanel" type="PanelContainer" node_paths=PackedStringArray("character_bind")]
+[node name="CharacterStatsPanel" type="PanelContainer"]
 size_flags_horizontal = 3
 script = ExtResource("1_o338i")
-character_bind = NodePath("")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -19,6 +18,7 @@ layout_mode = 2
 front_color = Color(1, 0, 0, 1)
 
 [node name="pa_bar" parent="VBoxContainer" instance=ExtResource("2_l3qe0")]
+visible = false
 layout_mode = 2
 internal_label = "PA"
 front_color = Color(0, 0.709804, 1, 1)

@@ -4,7 +4,8 @@ extends Sprite2D
 @export var target := Vector2(0,0)
 var source := Vector2(0,0)
 var direction := Vector2(0,0)
-var target_reached := false
+
+signal target_reached
 
 func _ready() -> void:
 	source = position
@@ -13,9 +14,9 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not target_reached:
-		if (target - position).dot(direction) < 0:
-			visible = false
-			target_reached = true
-		position += direction * speed * delta
+	if (target - position).dot(direction) < 0:
+		visible = false
+		target_reached.emit()
+		queue_free()
+	position += direction * speed * delta
 	

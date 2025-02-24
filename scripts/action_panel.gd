@@ -14,6 +14,7 @@ var selected_cells := 0
 var action_type : int = Action.ActionType.NONE
 
 signal clicked_cell(value:int)
+signal changed_type(value:int)
 
 func _ready() -> void:
 	update()
@@ -92,4 +93,5 @@ func _on_action_panel_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("klik"):
 		action_type = (action_type+1)%len(Action.ActionType.keys())
 		update()
+		changed_type.emit(action_type)
 	

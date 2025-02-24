@@ -5,22 +5,22 @@ extends Control
 @export var back_color := Color(0.4,0.4,0.4)
 @export var front_color :=Color(1,1,1)
 
-@onready var background: ColorRect = $background
 @onready var label: Label = $Label
-@onready var resizable: ColorRect = $resizable
+@onready var progress_bar: ProgressBar = $ProgressBar
 
 func _ready() -> void:
-	background.color = back_color;
-	resizable.color = front_color;
+	var styleBoxBackground = StyleBoxFlat.new()
+	var styleBoxFill = StyleBoxFlat.new()
+	styleBoxBackground.bg_color = back_color
+	styleBoxFill.bg_color = front_color
+	progress_bar.add_theme_stylebox_override("background", styleBoxBackground)
+	progress_bar.add_theme_stylebox_override("fill", styleBoxFill)
+
 	label.text = internal_label
-	resizable.size.y = size.y
 
 func set_values(actual, maximum) ->  void:
-	var factor :float = float(actual) / maximum
-	
-	resizable.size.x = size.x
-	resizable.scale.x = factor
-	
-	#print("FACTOR: ", factor, " ", resizable.size.x, " ", size.x, " ", factor * size.x)
 	label.text = internal_label + ": %d/%d" % [actual, maximum]
+	progress_bar.max_value = maximum
+	progress_bar.value = actual
+	
 	

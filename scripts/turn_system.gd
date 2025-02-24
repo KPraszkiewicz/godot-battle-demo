@@ -1,8 +1,7 @@
 class_name TurnSystem
 extends Node
 
-@onready var characters_node: Node2D = %characters
-@onready var map: Map = %Map
+@onready var map_handler: Node2D = %MapHandler
 
 var turn_queue = []
 var turn_it := 0
@@ -11,8 +10,11 @@ var actions_it := 0
 
 var turn_counter = 1
 
+func _get_characters() -> Array[GameCharacter]:
+	return map_handler.map.get_characters()
+
 func unready_characters():
-	for ch in characters_node.get_children():
+	for ch in _get_characters():
 		ch.is_ready = false
 
 func sort_actions():
@@ -35,7 +37,7 @@ func sort_actions():
 
 
 func gen_turn_queue() -> void:
-	var chs := characters_node.get_children()
+	var chs := _get_characters()
 	turn_queue.clear()
 	for ch in chs:
 		turn_queue.push_back(ch)
@@ -46,13 +48,14 @@ func gen_actions_queue() -> void:
 	actions_queue.clear()
 	actions_it = 0
 	
-	for ch:GameCharacter in characters_node.get_children():
+	for ch:GameCharacter in _get_characters():
 		if ch.is_dead():
 			continue
 		if ch.ai_control and not ch.is_ready:
-			ch.set_actions(ch.ai_module.get_actions(map))
+			ch.set_actions(ch.ai_module.get_actions(map_handler.map))
 			ch.is_ready = true
 		for a in ch.actions:
+			#actions_queue.push_back({"char":ch,"action": Action.get_copy(a)})
 			actions_queue.push_back({"char":ch,"action": a})
 
 
@@ -81,7 +84,7 @@ func is_actual_ai():
 	return turn_queue[turn_it].ai_control
 	
 func is_all_ready() -> bool:
-	for ch:GameCharacter in characters_node.get_children():
+	for ch:GameCharacter in _get_characters():
 		if not (ch.is_ready or ch.is_dead()):
 			return false
 	return true
@@ -89,7 +92,7 @@ func is_all_ready() -> bool:
 func check_end_battle() -> bool:
 	var fractions = {}
 
-	for ch:GameCharacter in characters_node.get_children():
+	for ch:GameCharacter in _get_characters():
 		if not ch.is_dead():
 			if ch.fraction in fractions:
 				fractions[ch.fraction] += 1

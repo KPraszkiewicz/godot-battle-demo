@@ -16,3 +16,7 @@ func _on_b_finish_pressed() -> void:
 func update():
 	ally_stats_panel.update()
 	player_actions_panel.update()
+
+func reset():
+	#TODO
+	pass

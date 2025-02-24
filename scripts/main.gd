@@ -1,12 +1,18 @@
 extends Node
 
 @onready var turn_system: TurnSystem = %Turn_system
-@onready var map: Map = %Map
+@onready var movement_system: MovementSystem = $Movement_system
+@onready var attack_system: AttackSystem = $Attack_system
+
+@onready var map_handler: Node2D = %MapHandler
+
 @onready var player_actions_panel: PanelContainer = %PlayerActionsPanel
-@onready var ui_turn_queue: HBoxContainer = %UiTurnQueue
 @onready var te_actions: TextEdit = %teActions
 @onready var gui: CanvasLayer = $Gui
-@onready var mid_menu: PanelContainer = %MidMenu
+@onready var main_menu_container: TabContainer = %MainMenuContainer
+@onready var ally_stats_panel: PanelContainer = %AllyStatsPanel
+@onready var enemy_stats_panel: PanelContainer = %EnemyStatsPanel
+@onready var b_finish: Button = $Gui/bFinish
 
 enum GameState {
 	IDLE,
@@ -33,14 +39,15 @@ func print_actions():
 		#print(a["char"].char_name, ": ", Action.get_action_full_string(a["action"]))
 
 func _ready() -> void:
-	turn_system.gen_turn_queue()
-	gameState = GameState.START_TURN
 	print("ready MAIN")
-	pass
 
 func change_gameState(new_state):
 	print(GameState.keys()[gameState], " -> ", GameState.keys()[new_state])
 	gameState = new_state
+
+func reset_game():
+	turn_system.gen_turn_queue()
+	gameState = GameState.START_TURN
 
 func _process(_delta: float) -> void:
 	gui.update()
@@ -48,7 +55,7 @@ func _process(_delta: float) -> void:
 		turn_system.gen_actions_queue()
 		turn_system.sort_actions()
 		print_actions()
-		
+		b_finish.show()
 		
 		change_gameState(GameState.WAITING)
 		
@@ -58,19 +65,22 @@ func _process(_delta: float) -> void:
 			turn_system.sort_actions()
 			print_actions()
 			print("is_all_ready")
-		if map.state_waiting == false and false:
+		if map_handler.map.state_waiting == false and false:
 			change_gameState(GameState.EXECUTING_ACTIONS)
 			print("map.state_waiting")
 			
 	
 	elif GameState.EXECUTING_ACTIONS == gameState:
 		print_actions()
-		if turn_system.actions_queue_end():
-			change_gameState(GameState.END_TURN)
-		elif map.is_action_done():
-			var ac = turn_system.get_actual_action()
-			exec_action(ac["char"], ac["action"])
-			turn_system.goto_next_action()
+		if is_action_end():
+			if turn_system.actions_queue_end():
+				change_gameState(GameState.END_TURN)
+			else:
+				var ac = turn_system.get_actual_action()
+				exec_action(ac["char"], ac["action"])
+				turn_system.goto_next_action()
+				ally_stats_panel.update()
+				enemy_stats_panel.update()
 		
 	
 	elif GameState.END_TURN == gameState:
@@ -82,29 +92,28 @@ func _process(_delta: float) -> void:
 			change_gameState(GameState.START_TURN)
 			
 	elif GameState.END_GAME == gameState:
-		mid_menu.visible = true
+		main_menu_container.show_EndMenu()
 		
 func exec_action(character: GameCharacter, action: Action):
 	print("AKCJA (", character.char_name, "): ", Action.get_action_name(action.type), " TARGET: ", action.target, " PA: ", action.points)
-	
+	if character.is_dead():
+		return
 	if action.type == Action.ActionType.MOVE:
-		map.make_action(character, action)
+		#map_handler.map.make_action(character, action)
+		movement_system.exec(character, action)
 	elif action.type == Action.ActionType.ATACK:
-		map.make_action(character, action)
-		#var target = map.get_character(action.target)
-		#target.take_damage(character.normal_atack())
-		#if target.is_dead():
-			#print("Zabito gracza: ", target.char_name)
-			#pass
-			#target
-			#map.remove_character(target)
-			#ui_turn_queue.update()
-			
+		attack_system.exec(character, action)
+
+func is_action_end():
+	return not movement_system.action_running and not attack_system.attack_runnig
 
 func _on_gui_player_actions_confirm() -> void:
-	for ch:GameCharacter in %characters.get_children():
+	b_finish.hide()
+	for ch:GameCharacter in map_handler.map.get_characters():
 		if not ch.ai_control:
 			for a:Action in ch.actions:
 				if a.type == Action.ActionType.ATACK:
-					a.target = map.get_grid_position(map.selectet_char)
+					a.target = map_handler.map.get_grid_position(map_handler.map.selectet_char)
+				if a.type == Action.ActionType.MOVE:
+					a.target = movement_system.player_move_target
 			ch.is_ready = true

@@ -20,8 +20,8 @@ func _ready() -> void:
 	if character_bind:
 		update()
 
-func assign(char: GameCharacter) -> void:
-	character_bind = char
+func assign(character: GameCharacter) -> void:
+	character_bind = character
 	update()
 
 func update() -> void:
@@ -41,6 +41,9 @@ func reset() -> void:
 	
 	
 func set_actions_to_character() -> void:
+	if not character_bind:
+		print("WARNING: [set_actions_to_character()] character_bind is null ")
+		return
 	character_bind.actions[0].type = action_1.action_type
 	character_bind.actions[1].type = action_2.action_type
 	character_bind.actions[2].type = action_3.action_type
@@ -116,3 +119,19 @@ func _on_action_5_clicked_cell(value: int) -> void:
 	character_bind.actions[4].points = pa5
 	action_5.set_value(pa5)
 	pa_changed.emit()
+
+
+func _on_action_1_changed_type(value: int) -> void:
+	character_bind.actions[0].type = value
+
+func _on_action_2_changed_type(value: int) -> void:
+	character_bind.actions[1].type = value
+
+func _on_action_3_changed_type(value: int) -> void:
+	character_bind.actions[2].type = value
+
+func _on_action_4_changed_type(value: int) -> void:
+	character_bind.actions[3].type = value
+
+func _on_action_5_changed_type(value: int) -> void:
+	character_bind.actions[4].type = value

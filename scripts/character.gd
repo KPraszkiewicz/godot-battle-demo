@@ -1,17 +1,17 @@
 class_name GameCharacter
 extends Node2D
 
-const Action = preload("res://scripts/action.gd")
+#const Action = preload("res://scripts/action.gd")
 @onready var ai_module: Node = $aiModule
 @onready var glow: Sprite2D = $glow
 @onready var blood: AnimatedSprite2D = $blood
 @onready var animation_player: AnimationPlayer = $sprite/AnimationPlayer
 @onready var sprite: Sprite2D = $sprite
 
-signal action_ended
+signal move_ended;
 
-var targets: PackedVector2Array
-var target: Vector2
+var _move_targets: PackedVector2Array
+var _move_target: Vector2
 var speed: float = 100
 var direction: Vector2
 var is_action_proccesing := false
@@ -22,14 +22,19 @@ var anim_direction := "D_"
 var anim_variant := 1
 
 
+var action_target_enemy: Vector2 = Vector2(0,0)
+var action_tagret_ally: Vector2 = Vector2(0,0)
+var action_target_move: Vector2 = Vector2(0,0)
+
+
 @export var char_name := ""
 @export var fraction := "neutral"
 @export_group("Stats")
 @export var max_hp := 100
 var hp := max_hp
-@export var atack_damage := 10
-@export var atack_range := 2
-@export var walk_range := 4
+@export var attack_damage := 10
+@export var attack_range := 2
+@export var walk_speed := 2
 @export var max_pa := 10
 var pa := max_pa
 @export var max_actions := 5
@@ -40,12 +45,14 @@ var pa := max_pa
 
 var actions: Array[Action] = []
 
-
+func get_actual_move_disctance() -> int:
+	var result := 0
+	for action in actions:
+		if action.type == Action.ActionType.MOVE:
+			result += action.points * walk_speed
+	return result
 
 func add_action(action:Action) -> bool:
-	print(Action.ActionType.keys()[action.type])
-	print(action.target)
-	print("PA: ", action.points)
 	if actions.size() < max_actions:
 		actions.push_back(action)
 		return true;
@@ -58,10 +65,12 @@ func set_actions(new_actions:Array[Action]) -> void:
 	actions = new_actions
 
 func normal_atack() -> int:
-	return atack_damage
+	return attack_damage
 
 func take_damage(damage) -> void:
 	hp -= damage
+	if hp <= 0:
+		animation_player.play(anim_direction + "DEATH")
 
 func is_dead() -> bool:
 	return (hp <= 0)
@@ -70,8 +79,8 @@ func _init() -> void:
 	for i in range(max_actions):
 		actions.push_back(Action.new())
 	
-func play_attack(target: Vector2):
-	rotate_to(target - position)
+func play_attack(target_position: Vector2):
+	rotate_to(target_position - position)
 	animation_player.play(anim_direction + "ATTACK")
 
 func rotate_to(V: Vector2):
@@ -94,34 +103,36 @@ func rotate_to(V: Vector2):
 
 func _ready() -> void:
 	hp = max_hp
+	$Control.tooltip_text = char_name
 	#animated_sprite_2d.play("U_IDLE")
 	animation_player.play("U_IDLE")
 	if ai_control:
 		ai_module.set_script(ai_module_script)
 
-func process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if moving:
-		if (target - position).length() < 1: 
-			position = target
+		if (_move_target - position).length() < 1: 
+			position = _move_target
 			change_move_target()
 		else:
 			position += direction * speed * delta 
 
 func change_move_target():
-	if targets.size() > 0:
-		target = targets[0]
-		targets.remove_at(0)
-		direction = (target - position).normalized()
+	if _move_targets.size() > 0:
+		_move_target = _move_targets[0]
+		_move_targets.remove_at(0)
+		direction = (_move_target - position).normalized()
 		rotate_to(direction)
 		animation_player.play(anim_direction + "WALK")
 	else:
 		moving = false
 		animation_player.play(anim_direction + "IDLE")
+		move_ended.emit()
 	scale.x = anim_variant
 
 func add_move_targets(targ):
-	targets = targ
-	#targets.reverse()
+	_move_targets = targ
+	#_move_targets.reverse()
 	
 func start_moving():
 	moving = true
@@ -132,6 +143,13 @@ func play_blood(angle := 0.0):
 	blood.play("S_BLOOD")
 	blood.rotation = angle
 	
+func play_blood_from(source_char: GameCharacter):
+	var v = position - source_char.position
+	var angle = atan2(v.y,v.x)
+	blood.visible = true;
+	blood.play("S_BLOOD")
+	blood.rotation = angle
+
 func select():
 	glow.visible = true
 	

@@ -317,4 +317,12 @@ scale = Vector2(1.6, 1.6)
 sprite_frames = ExtResource("5_1rw6u")
 animation = &"D_BLOOD"
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
 [connection signal="animation_finished" from="blood" to="." method="_on_blood_animation_finished"]
